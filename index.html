@@ -307,6 +307,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -358,7 +380,7 @@
 <h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>html<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;select id=<span class="string">"entTypeCode"</span> name=<span class="string">"entTypeCode"</span> class=<span class="string">"form-control"</span></div><div class="line">    multiple=<span class="string">"multiple"</span>&gt;&lt;/select&gt;</div></pre></td></tr></table></figure></p>
 <p>js<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#entTypeCode"</span>).select2(&#123;</div><div class="line">        placeholder: <span class="string">"请选择企业类型"</span>,</div><div class="line">        minimumInputLength: 0,</div><div class="line">        allowClear: <span class="literal">false</span>,</div><div class="line">        theme: <span class="string">"bootstrap"</span>,</div><div class="line">        formatResult: <span class="keyword">function</span> (item) &#123;</div><div class="line">            <span class="built_in">return</span> <span class="string">'&lt;div&gt;'</span> + item.dictName + <span class="string">'&lt;/div&gt;'</span>;</div><div class="line">        &#125;, // 搜索列表中的显示</div><div class="line">        formatSelection: <span class="keyword">function</span> (item) &#123;</div><div class="line">            <span class="built_in">return</span> item.dictName;</div><div class="line">        &#125;, // 选择结果中的显示,</div><div class="line">        ajax: &#123;</div><div class="line">            url: path + <span class="string">"/common/queryDictList"</span>, // 异步请求地址</div><div class="line">            dataType: <span class="string">"json"</span>, // 数据类型</div><div class="line">            <span class="built_in">type</span>: <span class="string">"POST"</span>,</div><div class="line">            data: <span class="keyword">function</span> (params) &#123; // 请求参数</div><div class="line">                <span class="built_in">return</span> &#123;</div><div class="line">                    dictType: <span class="string">"ENT_TYPE"</span>,</div><div class="line">                    dictCode: params.term</div><div class="line">                    //term为前台输入的查询关键字，保存到sSearch对象，即后台保存关键字的对象</div><div class="line">                &#125;;</div><div class="line">            &#125;,</div><div class="line">            processResults: <span class="keyword">function</span> (data, page) &#123;</div><div class="line">                //results结果集，data为后台返回的查询结果</div><div class="line">                var resultArr = new Array();</div><div class="line">                var dataContent = data;</div><div class="line">                <span class="keyword">for</span> (var i = 0; i &lt; dataContent.length; i++) &#123;</div><div class="line">                    resultArr.push(</div><div class="line">                        &#123;id: dataContent[i].dictCode,</div><div class="line">                        text: dataContent[i].dictName&#125;</div><div class="line">                    );</div><div class="line">                &#125;</div><div class="line">                <span class="built_in">return</span> &#123;results: resultArr&#125;;</div><div class="line">            &#125;, // 构造返回结果</div><div class="line">            escapeMarkup: <span class="keyword">function</span> (m) &#123;</div><div class="line">                <span class="built_in">return</span> m;</div><div class="line">            &#125;,</div><div class="line">            success: <span class="keyword">function</span> (data) &#123;</div><div class="line">            &#125;,</div><div class="line">            error: <span class="keyword">function</span> (error) &#123;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;).on(<span class="string">"select2:select"</span>, <span class="keyword">function</span> (e) &#123;</div><div class="line">        $(this).valid();</div><div class="line">        //使用jquery validate在选择后重新进行校验</div><div class="line">    &#125;);</div></pre></td></tr></table></figure></p>
 <p>获取数据<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var entTypeCodeStr = $(<span class="string">"#entTypeCode"</span>).select2(<span class="string">"data"</span>).map(<span class="keyword">function</span> (item) &#123;</div><div class="line">                <span class="built_in">return</span> item.id;</div><div class="line">            &#125;) == null ? null : $(<span class="string">"#entTypeCode"</span>).select2(<span class="string">"data"</span>).map(<span class="keyword">function</span> (item) &#123;</div><div class="line">                    <span class="built_in">return</span> item.id;</div><div class="line">                &#125;).join(<span class="string">';'</span>);</div><div class="line">var entTypeNameStr = $(<span class="string">"#entTypeCode"</span>).select2(<span class="string">"data"</span>).map(<span class="keyword">function</span> (item) &#123;</div><div class="line">                <span class="built_in">return</span> item.text;</div><div class="line">            &#125;) == null ? null : $(<span class="string">"#entTypeCode"</span>).select2(<span class="string">"data"</span>).map(<span class="keyword">function</span> (item) &#123;</div><div class="line">                    <span class="built_in">return</span> item.text;</div><div class="line">                &#125;).join(<span class="string">';'</span>);</div></pre></td></tr></table></figure></p>
-
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">https://www.cnblogs.com/rysinal/p/5834431.html</div></pre></td></tr></table></figure>
           
         
       
@@ -450,6 +472,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -714,7 +758,25 @@
           
 
           
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>
